@@ -1,0 +1,9 @@
+spring:
+    application:
+        name: api-pessoa    
+    profiles:
+        active: dev
+    security:
+        user:
+            name: api_user
+            password: api@Tester2025
