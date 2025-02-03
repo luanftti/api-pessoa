@@ -16,6 +16,7 @@ import lombok.Setter;
 public class UsuarioDTO extends BaseDTO<Usuario> {
     private Long id;
     private String login;
+    private String nome;
 
     @Override
     public Usuario toEntity() {

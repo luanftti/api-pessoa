@@ -24,7 +24,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("Usu\u00E1rio n\u00E3o encontrado");
         }
-        return CustomUserDetails.builder().id(user.getId()).password(user.getSenha()).username(user.getLogin()).build();
+        return CustomUserDetails.builder().id(user.getId()).password(user.getSenha()).username(user.getLogin())
+                .nome(user.getNome()).build();
     }
 
 }

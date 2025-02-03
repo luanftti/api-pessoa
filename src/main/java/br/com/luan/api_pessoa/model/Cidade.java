@@ -2,6 +2,8 @@ package br.com.luan.api_pessoa.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,6 +43,7 @@ public class Cidade {
 
     @ManyToOne
     @JoinColumn(name = "fk_pais")
+    @JsonBackReference
     private Pais pais;
 
     @ManyToOne

@@ -1,5 +1,7 @@
 package br.com.luan.api_pessoa.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.luan.api_pessoa.model.CustomUserDetails;
+import br.com.luan.api_pessoa.model.Pessoa;
 import br.com.luan.api_pessoa.model.dto.PessoaDTO;
 import br.com.luan.api_pessoa.services.PessoaService;
 
@@ -32,7 +35,14 @@ public class PessoaController {
     @GetMapping("/buscarTodos")
     public ResponseEntity<String> buscarTodasPessoas() {
         try {
-            String json = mapper.writeValueAsString(service.buscarTodasPessoas());
+            List<Pessoa> retornoBanco = service.buscarTodasPessoas();
+            List<PessoaDTO> retorno = new ArrayList<>();
+            if (Objects.nonNull(retornoBanco)) {
+                for (Pessoa p : retornoBanco) {
+                    retorno.add((PessoaDTO) PessoaDTO.buildFromEntity(p, PessoaDTO.class));
+                }
+            }
+            String json = mapper.writeValueAsString(retorno);
             return ResponseEntity.ok(json);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());

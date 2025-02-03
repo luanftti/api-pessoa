@@ -2,6 +2,8 @@ package br.com.luan.api_pessoa.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,11 +37,15 @@ public class Usuario {
     @Column(name = "login", nullable = false, length = 100, unique = true)
     private String login;
 
+    @Column(name = "nome", nullable = false, length = 500)
+    private String nome;
+
     @Column(name = "senha", nullable = false, length = 50)
     private String senha;
 
     @ManyToOne
     @JoinColumn(name = "fk_usuario_criacao", updatable = false, nullable = false)
+    @JsonBackReference
     private Usuario usuarioCriacao;
 
     @Builder.Default
@@ -49,6 +55,7 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "fk_usuario_alteracao")
+    @JsonBackReference
     private Usuario usuarioAlteracao;
 
     @Column(name = "data_alteracao")
