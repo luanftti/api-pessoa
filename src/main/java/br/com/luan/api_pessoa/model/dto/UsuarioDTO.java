@@ -19,14 +19,14 @@ public class UsuarioDTO extends BaseDTO<Usuario> {
     private String nome;
 
     @Override
-    public Usuario toEntity() {
-        return BaseDTO.buildEntity(this);
+    protected Usuario toEntity() {
+        return Usuario.builder().id(this.id).login(this.login).nome(this.nome).build();
     }
 
     @Override
     protected BaseDTO<Usuario> fromEntity(Usuario entity) {
         try {
-            return BaseDTO.buildFromEntity(entity, UsuarioDTO.class);
+            return UsuarioDTO.builder().id(entity.getId()).login(entity.getLogin()).nome(entity.getNome()).build();
         } catch (Exception e) {
             return null;
         }

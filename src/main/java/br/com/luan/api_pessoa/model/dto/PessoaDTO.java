@@ -30,7 +30,7 @@ public class PessoaDTO extends BaseDTO<Pessoa> {
 
         @Override
         protected Pessoa toEntity() {
-                return Pessoa.builder().id(this.getId()).nome(this.nome).cpf(this.cpf).email(this.email)
+                return Pessoa.builder().id(this.id).nome(this.nome).cpf(this.cpf).email(this.email)
                                 .dataNascimento(this.dataNascimento)
                                 .cidade(Objects.isNull(this.cidadeNascimento) ? null
                                                 : Cidade.builder().id(this.cidadeNascimento.getId())

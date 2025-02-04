@@ -14,18 +14,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class PaisDTO extends BaseDTO<Pais> {
+    
     private Long id;
     private String nome;
 
     @Override
     public Pais toEntity() {
-        return BaseDTO.buildEntity(this);
+        return Pais.builder().id(this.id).nome(this.nome).build();
     }
 
     @Override
     public BaseDTO<Pais> fromEntity(Pais entity) {
         try {
-            return BaseDTO.buildFromEntity(entity, PaisDTO.class);
+            return PaisDTO.builder().id(entity.getId()).nome(entity.getNome()).build();
 
         } catch (Exception e) {
             return null;

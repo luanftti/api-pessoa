@@ -20,13 +20,13 @@ public class CidadeDTO extends BaseDTO<Cidade> {
 
     @Override
     public Cidade toEntity() {
-        return BaseDTO.buildEntity(this);
+        return Cidade.builder().id(this.id).nome(this.nome).build();
     }
 
     @Override
     public BaseDTO<Cidade> fromEntity(Cidade entity) {
         try {
-            return CidadeDTO.buildFromEntity(entity, CidadeDTO.class);
+            return CidadeDTO.builder().id(entity.getId()).nome(entity.getNome()).build();
         } catch (Exception e) {
             return null;
         }

@@ -22,8 +22,8 @@ public class PessoaService {
         return repository.buscarTodosAtivo();
     }
 
-    public Pessoa buscarPorId(Long id) throws Exception {
-        Pessoa retorno = repository.buscarPorId(id);
+    public PessoaDTO buscarPorId(Long id) throws Exception {
+        PessoaDTO retorno = (PessoaDTO) PessoaDTO.buildFromEntity(repository.buscarPorId(id), PessoaDTO.class);
         if (Objects.isNull(retorno)) {
             throw new Exception(String.format("N\u00E3o encontrato pessoa com id %d", id));
         }
@@ -45,8 +45,8 @@ public class PessoaService {
         return (PessoaDTO) PessoaDTO.buildFromEntity(repository.save(pessoa), PessoaDTO.class);
     }
 
-    public void deletarPessoa(PessoaDTO dto, Long userId) throws Exception {
-        Pessoa pessoa = PessoaDTO.buildEntity(dto);
+    public void deletarPessoa(Long pessoaId, Long userId) throws Exception {
+        Pessoa pessoa = new Pessoa();
         Usuario usuarioAlteracao = new Usuario();
         usuarioAlteracao.setId(userId);
         pessoa.setAtivo(false);
