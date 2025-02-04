@@ -15,7 +15,7 @@ import br.com.luan.api_pessoa.model.CustomUserDetails;
 import br.com.luan.api_pessoa.model.dto.UsuarioDTO;
 
 @RestController
-@RequestMapping("login")
+@RequestMapping("api/login")
 public class LoginController {
 
     private static ObjectMapper mapper = new ObjectMapper();
@@ -26,7 +26,8 @@ public class LoginController {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (Objects.nonNull(auth) && auth.getPrincipal() instanceof CustomUserDetails) {
                 CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
-                UsuarioDTO retorno = UsuarioDTO.builder().id(user.getId()).login(user.getUsername()).nome(user.getNome()).build();
+                UsuarioDTO retorno = UsuarioDTO.builder().id(user.getId()).login(user.getUsername())
+                        .nome(user.getNome()).build();
                 String json = mapper.writeValueAsString(retorno);
                 return ResponseEntity.ok(json);
             } else {
