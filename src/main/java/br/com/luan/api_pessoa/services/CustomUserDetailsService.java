@@ -20,6 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Entrou na requisição");
         Usuario user = repository.buscarUsuarioLogin(username);
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("Usu\u00E1rio n\u00E3o encontrado");

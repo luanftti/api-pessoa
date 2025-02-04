@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: api@2025$UU
-    username: api_user
+    password: admin@123
+    username: admin
     url: jdbc:postgresql://localhost:5432/postgres
