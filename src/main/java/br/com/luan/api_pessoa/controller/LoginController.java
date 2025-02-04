@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,17 +20,17 @@ public class LoginController {
 
     private static ObjectMapper mapper = new ObjectMapper();
 
-    @GetMapping()
+    @PostMapping()
     public ResponseEntity<String> login() {
         try {
-            System.out.println("Entrou Login");
+
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (Objects.nonNull(auth) && auth.getPrincipal() instanceof CustomUserDetails) {
                 CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
                 UsuarioDTO retorno = UsuarioDTO.builder().id(user.getId()).login(user.getUsername())
                         .nome(user.getNome()).build();
                 String json = mapper.writeValueAsString(retorno);
-                System.out.println("Retorno Login");
+
                 return ResponseEntity.ok(json);
             } else {
                 return ResponseEntity.internalServerError().body("Erro ao autenticar usuário");

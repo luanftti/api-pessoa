@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import br.com.luan.api_pessoa.repository.UsuarioRepository;
 import br.com.luan.api_pessoa.services.CustomUserDetailsService;
 
 @Configuration
@@ -23,7 +25,7 @@ import br.com.luan.api_pessoa.services.CustomUserDetailsService;
 public class SecurityConfiguration {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    UsuarioRepository usuarioRepository;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -32,10 +34,15 @@ public class SecurityConfiguration {
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsService())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return http.build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new CustomUserDetailsService(usuarioRepository, passwordEncoder());
     }
 
     @Bean
