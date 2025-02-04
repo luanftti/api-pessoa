@@ -15,7 +15,7 @@ import br.com.luan.api_pessoa.model.CustomUserDetails;
 import br.com.luan.api_pessoa.model.dto.UsuarioDTO;
 
 @RestController
-@RequestMapping("api/login")
+@RequestMapping("login")
 public class LoginController {
 
     private static ObjectMapper mapper = new ObjectMapper();

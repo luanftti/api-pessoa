@@ -23,7 +23,7 @@ import br.com.luan.api_pessoa.model.dto.PessoaDTO;
 import br.com.luan.api_pessoa.services.PessoaService;
 
 @RestController
-@RequestMapping("api/pessoa")
+@RequestMapping("pessoa")
 @CrossOrigin
 public class PessoaController {
 
