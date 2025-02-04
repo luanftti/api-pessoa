@@ -11,7 +11,7 @@ import br.com.luan.api_pessoa.model.Pais;
 @Repository
 public interface PaisRepository extends JpaRepository<Pais, Long> {
 
-    @Query("SELECT p FROM Pais WHERE p.ativo = true")
+    @Query("SELECT p FROM Pais p WHERE p.ativo = true")
     public List<Pais> buscarTodosAtivo();
 
 }

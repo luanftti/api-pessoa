@@ -11,7 +11,7 @@ import br.com.luan.api_pessoa.model.Cidade;
 @Repository
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 
-    @Query("SELECT c FROM Cidade WHERE c.ativo = true")
+    @Query("SELECT c FROM Cidade c WHERE c.ativo = true")
     public List<Cidade> buscarTodasAtivo();
-    
+
 }

@@ -11,6 +11,6 @@ import br.com.luan.api_pessoa.model.Estado;
 @Repository
 public interface EstadoRepository extends JpaRepository<Estado, Long> {
 
-    @Query("SELECT e FROM Estado WHERE e.ativo = true")
+    @Query("SELECT e FROM Estado e WHERE e.ativo = true")
     public List<Estado> buscarTodosAtivo();
 }
