@@ -1,9 +1,18 @@
 spring:
     application:
-        name: api-pessoa    
+        name: api-pessoa
     profiles:
         active: dev
     security:
         user:
             name: api_user
             password: api@Tester2025
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        password: admin@123
+        username: admin
+        url: jdbc:postgresql://localhost:5432/postgres
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
